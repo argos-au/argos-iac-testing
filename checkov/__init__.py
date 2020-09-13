@@ -13,11 +13,13 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     req_body = req.get_json()
 
     if file_type == 'json':
-        template = 'template.json'
+        template = '/tmp/template.json'
+        logging.info('Creating temp file now')
         with open(template, 'w') as outfile:
             json.dump(req_body, outfile, indent=4)
+        logging.info('Creating temp file worked')
     elif file_type == 'yaml':
-        template = 'template.yaml'
+        template = '/tmp/template.yaml'
         with open(template, 'w') as outfile:
             yaml.dump(req_body, outfile, indent=4)
 
