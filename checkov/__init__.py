@@ -27,7 +27,9 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     else:
         print("The file does not exist")
     if output:
-        return func.HttpResponse(f"{output.stdout}")
+        func.HttpResponse.mimetype = 'application/json'
+        func.HttpResponse.charset = 'utf-8'
+        return func.HttpResponse(output.stdout)
     else:
         return func.HttpResponse(
              "This HTTP triggered function executed successfully. Pass a name in the query string or in the request body for a personalized response.",
