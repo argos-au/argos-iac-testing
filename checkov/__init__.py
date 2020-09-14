@@ -7,17 +7,14 @@ import json
 import yaml
 
 def main(req: func.HttpRequest) -> func.HttpResponse:
-    logging.info('Python HTTP trigger function processed a request.')
     provider = req.params.get('provider')
     file_type = req.params.get('file_type')
     req_body = req.get_json()
 
     if file_type == 'json':
         template = '/tmp/template.json'
-        logging.info('Creating temp file now')
         with open(template, 'w') as outfile:
             json.dump(req_body, outfile, indent=4)
-        logging.info('Creating temp file worked')
     elif file_type == 'yaml':
         template = '/tmp/template.yaml'
         with open(template, 'w') as outfile:
